@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dharshini S — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161B22;
+    --paper:#F6F3EC;
+    --coral:#E2643A;
+    --teal:#2E6E68;
+    --slate:#6B7280;
+    --line:#D8D2C4;
+    --paper-dim:#EDE9DD;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+
+  /* ---- court-line divider: dashed center line like a badminton court ---- */
+  .court-rule{
+    position:relative;
+    height:1px;
+    background:var(--line);
+    margin:0;
+  }
+  .court-rule::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:-4px;
+    transform:translateX(-50%);
+    width:1px;
+    height:9px;
+    background:var(--coral);
+  }
+
+  /* ---- nav ---- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,243,236,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 0;
+  }
+  .logo{font-weight:700;font-size:1.05rem;letter-spacing:-0.01em;}
+  .logo span{color:var(--coral);}
+  .navlinks{display:flex;gap:28px;list-style:none;font-size:0.88rem;}
+  .navlinks a{text-decoration:none;color:var(--slate);transition:color .2s;}
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks a:focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
+  @media (max-width:640px){.navlinks{display:none;}}
+
+  /* ---- hero ---- */
+  .hero{
+    padding:88px 0 64px;
+    display:grid;grid-template-columns:1.3fr 1fr;gap:48px;
+    align-items:start;
+  }
+  @media (max-width:820px){.hero{grid-template-columns:1fr;padding:56px 0 40px;}}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.78rem;
+    color:var(--teal);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{
+    content:"";display:inline-block;width:8px;height:8px;
+    background:var(--coral);border-radius:50%;
+  }
+  .hero h1{
+    font-size:clamp(2.3rem,5vw,3.6rem);
+    line-height:1.04;
+    letter-spacing:-0.02em;
+    font-weight:600;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--coral);
+  }
+  .hero p.lede{
+    margin-top:22px;
+    font-size:1.08rem;
+    color:#3a3f47;
+    max-width:46ch;
+  }
+  .hero-actions{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.82rem;
+    padding:12px 20px;
+    border-radius:2px;
+    text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn:focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
+  .btn-primary{background:var(--ink);color:var(--paper);}
+  .btn-primary:hover{background:var(--coral);transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--ink);}
+
+  /* ---- scoreboard signature element ---- */
+  .scoreboard{
+    background:var(--ink);
+    color:var(--paper);
+    border-radius:4px;
+    padding:22px 22px 18px;
+    position:relative;
+    overflow:hidden;
+  }
+  .scoreboard::after{
+    content:"";
+    position:absolute;inset:0;
+    background:repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 3px);
+    pointer-events:none;
+  }
+  .sb-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    color:#9aa4ad;
+    text-transform:uppercase;
+    border-bottom:1px solid #2c343d;
+    padding-bottom:12px;margin-bottom:4px;
+  }
+  .sb-head .live{color:var(--coral);}
+  .sb-row{
+    display:grid;grid-template-columns:34px 1fr auto;gap:12px;
+    align-items:center;
+    padding:13px 0;
+    border-bottom:1px solid #232b33;
+    font-size:0.86rem;
+  }
+  .sb-row:last-child{border-bottom:none;}
+  .sb-tag{
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.68rem;
+    color:#6f7882;
+  }
+  .sb-result{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--coral);font-size:0.78rem;text-align:right;}
+  .sb-gold{color:#E8B339;}
+
+  /* ---- sections ---- */
+  section{padding:54px 0;}
+  .section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:30px;}
+  .section-num{font-family:'JetBrains Mono',monospace;color:var(--coral);font-size:0.85rem;}
+  .section-head h2{font-size:1.5rem;font-weight:600;letter-spacing:-0.01em;}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  @media (max-width:720px){.about-grid{grid-template-columns:1fr;}}
+  .about-grid p{color:#3a3f47;}
+  .info-list{list-style:none;font-size:0.92rem;}
+  .info-list li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);}
+  .info-list li span:first-child{color:var(--slate);font-family:'JetBrains Mono',monospace;font-size:0.78rem;}
+
+  /* education / internship timeline */
+  .tl-item{
+    display:grid;grid-template-columns:130px 1fr;gap:22px;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .tl-item:last-child{border-bottom:none;}
+  @media (max-width:600px){.tl-item{grid-template-columns:1fr;gap:6px;}}
+  .tl-year{font-family:'JetBrains Mono',monospace;color:var(--teal);font-size:0.85rem;}
+  .tl-item h3{font-size:1.05rem;font-weight:600;margin-bottom:4px;}
+  .tl-item .org{color:var(--slate);font-size:0.88rem;margin-bottom:8px;}
+  .tl-item ul{padding-left:18px;font-size:0.92rem;color:#3a3f47;}
+  .tl-item ul li{margin-bottom:4px;}
+  .cgpa-tag{
+    display:inline-block;margin-top:6px;
+    font-family:'JetBrains Mono',monospace;font-size:0.75rem;
+    background:var(--paper-dim);border:1px solid var(--line);
+    padding:3px 8px;border-radius:2px;color:var(--ink);
+  }
+
+  /* project card */
+  .project-card{
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:30px;
+    background:#fff;
+    position:relative;
+  }
+  .project-card::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:var(--coral);
+  }
+  .project-card h3{font-size:1.2rem;margin-bottom:6px;}
+  .stack{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px;}
+  .stack span{
+    font-family:'JetBrains Mono',monospace;font-size:0.72rem;
+    background:var(--paper-dim);padding:4px 9px;border-radius:2px;color:var(--teal);
+    border:1px solid var(--line);
+  }
+  .project-card ul{padding-left:18px;color:#3a3f47;font-size:0.93rem;}
+  .project-card ul li{margin-bottom:6px;}
+
+  /* skills */
+  .skills-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;}
+  @media (max-width:680px){.skills-grid{grid-template-columns:1fr;}}
+  .skill-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--slate);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;}
+  .pill-row{display:flex;flex-wrap:wrap;gap:10px;}
+  .pill{
+    border:1px solid var(--line);
+    padding:8px 14px;border-radius:2px;
+    font-size:0.88rem;
+    background:#fff;
+  }
+  .pill.accent{border-color:var(--teal);color:var(--teal);}
+
+  /* activities */
+  .act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media (max-width:760px){.act-grid{grid-template-columns:1fr;}}
+  .act-card{padding:22px;border:1px solid var(--line);border-radius:4px;background:#fff;}
+  .act-card .role{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--coral);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;}
+  .act-card h3{font-size:1rem;margin-bottom:6px;}
+  .act-card p{font-size:0.86rem;color:var(--slate);}
+
+  /* footer / contact */
+  footer{
+    background:var(--ink);color:var(--paper);
+    padding:60px 0 40px;
+    margin-top:40px;
+  }
+  footer h2{font-size:1.8rem;margin-bottom:14px;}
+  footer p{color:#a9b0b8;max-width:42ch;margin-bottom:26px;}
+  .contact-grid{display:flex;flex-wrap:wrap;gap:30px;margin-bottom:34px;}
+  .contact-item{font-family:'JetBrains Mono',monospace;font-size:0.85rem;}
+  .contact-item span{display:block;color:#6f7882;font-size:0.7rem;text-transform:uppercase;margin-bottom:4px;}
+  .contact-item a{text-decoration:none;color:var(--paper);}
+  .contact-item a:hover{color:var(--coral);}
+  .foot-bottom{
+    border-top:1px solid #2c343d;
+    padding-top:20px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+    font-size:0.78rem;color:#6f7882;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo">DHARSHINI<span>.S</span></div>
+      <ul class="navlinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#project">Project</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <section class="hero" id="top">
+      <div>
+        <div class="eyebrow">B.Sc Computer Science · Rajapalayam</div>
+        <h1>Builds steady systems.<br>Plays for <em>keeps</em>.</h1>
+        <p class="lede">Computer Science student and national-level Ball Badminton player. I bring the same discipline from the court into embedded systems and IoT — currently working on real-time monitoring devices that matter in clinical and field settings.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#project">View the project ↓</a>
+          <a class="btn btn-ghost" href="mailto:shivainidharshini@gmail.com">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="scoreboard">
+        <div class="sb-head"><span>Match Record</span><span class="live">● National Circuit</span></div>
+        <div class="sb-row">
+          <span class="sb-tag">FIN</span>
+          <span>All India Inter-University — Silver</span>
+          <span class="sb-result">2nd</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-tag">FIN</span>
+          <span>All India Inter-University — Bronze</span>
+          <span class="sb-result">3rd</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-tag">FIN</span>
+          <span>All India Inter-University — Bronze</span>
+          <span class="sb-result">3rd</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-tag">AWD</span>
+          <span>Cash Award, Deputy CM</span>
+          <span class="sb-result sb-gold">₹75,000</span>
+        </div>
+        <div class="sb-row">
+          <span class="sb-tag">HON</span>
+          <span>Olympic Torch Bearer</span>
+          <span class="sb-result sb-gold">★</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="court-rule"></div>
+
+  <div class="wrap">
+    <section id="about">
+      <div class="section-head"><span class="section-num">/01</span><h2>About</h2></div>
+      <div class="about-grid">
+        <p>I'm a final-year Computer Science student at Rajapalayam Rajus' College with a hands-on grounding in IoT and embedded systems, picked up through an internship building sensor-driven applications for rain detection, soil moisture, and liquid-level monitoring. I'm looking for a role where I can keep building practical, real-time systems — and keep showing up with the consistency that two years of national-level competition has trained into me.</p>
+        <ul class="info-list">
+          <li><span>LOCATION</span><span>Rajapalayam, Tamil Nadu</span></li>
+          <li><span>LANGUAGES</span><span>Tamil, English</span></li>
+          <li><span>FOCUS</span><span>Java · Python · IoT · .NET · SQL</span></li>
+          <li><span>STATUS</span><span>Open to opportunities</span></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div class="court-rule"></div>
+
+  <div class="wrap">
+    <section id="education">
+      <div class="section-head"><span class="section-num">/02</span><h2>Education & Experience</h2></div>
+
+      <div class="tl-item">
+        <div class="tl-year">2023 — 2026</div>
+        <div>
+          <h3>B.Sc Computer Science</h3>
+          <div class="org">Rajapalayam Rajus' College, Rajapalayam</div>
+          <span class="cgpa-tag">8.3 CGPA</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">2022</div>
+        <div>
+          <h3>Higher Secondary Certificate</h3>
+          <div class="org">Annapparaja Memorial HSC School, Rajapalayam</div>
+          <span class="cgpa-tag">71%</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-year">Internship</div>
+        <div>
+          <h3>IoT & Real-Time Applications</h3>
+          <div class="org">Anjana Infotec</div>
+          <ul>
+            <li>Hands-on work with IoT sensors and real-time application development</li>
+            <li>Built modules for rain detection, soil moisture sensing, traffic simulation, and liquid level monitoring</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="court-rule"></div>
+
+  <div class="wrap">
+    <section id="project">
+      <div class="section-head"><span class="section-num">/03</span><h2>Academic Project</h2></div>
+      <div class="project-card">
+        <h3>IV Fluid Monitoring System</h3>
+        <div class="stack">
+          <span>Arduino</span><span>Embedded C</span><span>IoT Sensors</span><span>Ultrasonic Sensor</span><span>Alert System</span>
+        </div>
+        <ul>
+          <li>Built an IoT-based system to monitor IV fluid levels in real time using an ultrasonic sensor</li>
+          <li>Implemented an alert mechanism that flags staff when fluid drops below a defined threshold</li>
+          <li>Reduced manual monitoring effort and improved patient safety in clinical settings</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div class="court-rule"></div>
+
+  <div class="wrap">
+    <section id="skills">
+      <div class="section-head"><span class="section-num">/04</span><h2>Skills</h2></div>
+      <div class="skills-grid">
+        <div>
+          <div class="skill-label">Technical</div>
+          <div class="pill-row">
+            <span class="pill accent">Java</span>
+            <span class="pill accent">Python</span>
+            <span class="pill accent">IoT</span>
+            <span class="pill accent">.NET</span>
+            <span class="pill accent">SQL</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-label">Personal</div>
+          <div class="pill-row">
+            <span class="pill">Quick Learner</span>
+            <span class="pill">Teamwork & Coordination</span>
+            <span class="pill">Communication</span>
+            <span class="pill">UI/UX (Workshop)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="court-rule"></div>
+
+  <div class="wrap">
+    <section id="activities">
+      <div class="section-head"><span class="section-num">/05</span><h2>Leadership & Activities</h2></div>
+      <div class="act-grid">
+        <div class="act-card">
+          <div class="role">Captain</div>
+          <h3>University Ball Badminton Team</h3>
+          <p>Led the team through national-level tournaments, coordinating strategy and squad selection.</p>
+        </div>
+        <div class="act-card">
+          <div class="role">Coordinator</div>
+          <h3>College Sports Events</h3>
+          <p>Organized and managed college-level sporting events end to end.</p>
+        </div>
+        <div class="act-card">
+          <div class="role">Player</div>
+          <h3>All India Inter-University Circuit</h3>
+          <p>Competed at the national level, earning two Bronze and one Silver medal.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk.</h2>
+    <p>Open to roles in software development, IoT, and embedded systems — happy to share more about the IV Fluid Monitoring project or anything else here.</p>
+    <div class="contact-grid">
+      <div class="contact-item"><span>Email</span><a href="mailto:shivainidharshini@gmail.com">shivainidharshini@gmail.com</a></div>
+      <div class="contact-item"><span>Phone</span><a href="tel:+919361576139">+91 93615 76139</a></div>
+      <div class="contact-item"><span>LinkedIn</span><a href="https://linkedin.com/in/dharshini" target="_blank" rel="noopener">linkedin.com/in/dharshini</a></div>
+      <div class="contact-item"><span>Location</span><span>Rajapalayam, Tamil Nadu</span></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Dharshini S</span>
+      <span>Built for GitHub Pages</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
